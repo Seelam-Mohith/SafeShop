@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}ShopSafe - Home{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Everyday essentials. Shopping made simple.</h1>
+        <p>Discover quality products at great prices</p>
+        <a href="{{ url_for('products') }}" class="btn">Shop Now</a>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Featured Categories</h2>
+    <div class="grid">
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Electronics</h3>
+                <p class="product-desc">Gadgets, headphones, and more</p>
+                <a href="{{ url_for('category', category_name='Electronics') }}" class="btn-sm btn-outline">View Category</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Fashion</h3>
+                <p class="product-desc">Clothing, accessories, and style</p>
+                <a href="{{ url_for('category', category_name='Fashion') }}" class="btn-sm btn-outline">View Category</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Home and Kitchen</h3>
+                <p class="product-desc">Essentials for home</p>
+                <a href="{{ url_for('category', category_name='Home and Kitchen') }}" class="btn-sm btn-outline">View Category</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Books</h3>
+                <p class="product-desc">Knowledge and entertainment</p>
+                <a href="{{ url_for('category', category_name='Books') }}" class="btn-sm btn-outline">View Category</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Accessories</h3>
+                <p class="product-desc">Stylish add-ons</p>
+                <a href="{{ url_for('category', category_name='Accessories') }}" class="btn-sm btn-outline">View Category</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="grid">
+        {% for product in featured_products %}
+        <div class="product-card">
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="product-img" onerror="this.src='https://placehold.co/400x300/e0e7ef/334155?text=Product'">
+            <div class="product-info">
+                <a href="{{ url_for('product_detail', product_id=product.id) }}" class="product-name">{{ product.name }}</a>
+                <div class="product-price">₹{{ product.price }}</div>
+                <div class="product-meta">{{ product.category }} • ★ {{ product.rating }}</div>
+                <div class="product-actions">
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-sm btn-outline">View Details</a>
+                    <button class="btn-sm btn-primary add-to-cart-btn" data-product-id="{{ product.id }}">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Best Selling Products</h2>
+    <div class="grid">
+        {% for product in best_selling %}
+        <div class="product-card">
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="product-img" onerror="this.src='https://placehold.co/400x300/e0e7ef/334155?text=Product'">
+            <div class="product-info">
+                <a href="{{ url_for('product_detail', product_id=product.id) }}" class="product-name">{{ product.name }}</a>
+                <div class="product-price">₹{{ product.price }}</div>
+                <div class="product-meta">{{ product.category }} • ★ {{ product.rating }}</div>
+                <div class="product-actions">
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-sm btn-outline">View Details</a>
+                    <button class="btn-sm btn-primary add-to-cart-btn" data-product-id="{{ product.id }}">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="hero" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+    <div class="hero-content">
+        <h2>Special Promotion</h2>
+        <p>Free shipping on orders above ₹2000</p>
+        <a href="{{ url_for('products') }}" class="btn">Explore Products</a>
+    </div>
+</section>
+{% endblock %}
